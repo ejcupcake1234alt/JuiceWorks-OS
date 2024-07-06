@@ -4,7 +4,7 @@ autoinstall:
   identity:
     hostname: "$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10 | md5sum | head -c 8)"
     username: JuiceWorks Admin
-    password: "$6$rounds=4096$abc$def12345" # Encrypted password for admin user
+    password: "$6$QnDwDgWN6tmfrOkd$QEvRKAV/Xo.giwyYiZy2mI6ITrXheSMqrdn.bLdNEegWJE5Ev.EHlrp8L5n1dsEfn0ZZ2uZzk.9Rz5amxWIsL." # Encrypted password for admin user
   user-data:
     disable_root: false
     users:
@@ -14,10 +14,10 @@ autoinstall:
         groups: [sudo, adm]
         sudo: ALL=(ALL) NOPASSWD:ALL
         lock_passwd: false
-        passwd: "$6$rounds=4096$abc$def12345" # Encrypted password for admin user
+        passwd: "$6$QnDwDgWN6tmfrOkd$QEvRKAV/Xo.giwyYiZy2mI6ITrXheSMqrdn.bLdNEegWJE5Ev.EHlrp8L5n1dsEfn0ZZ2uZzk.9Rz5amxWIsL." # Encrypted password for admin user
       - name: JuiceWorks Student
         gecos: "Normal User"
         primary_group: "users"
         groups: []
         lock_passwd: false
-        passwd: "$6$rounds=4096$xyz$ghi67890" # Encrypted password for normal user
+        passwd: "$6$mqy2ee21WLklhxia$O1U6Mi5aPpFWc08LxxX0QGeasxlH8AHEtsx792Bs6yM7hMYAu3MwjkaIEnraf2bNZ08g11V5/Ye4JP6kIkPSn/"
