@@ -1,0 +1,74 @@
+autoinstall:
+  version: 1
+  identity:
+    hostname: temporary-hostname
+    username: JuiceWorks Admin
+    password: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0
+" # Encrypted password for admin user
+  user-data:
+    disable_root: false
+    users:
+      - name: JuiceWorks Admin
+        gecos: "Admin User"
+        primary_group: "adm"
+        groups: [sudo, adm]
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        lock_passwd: false
+        passwd: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0
+" # Encrypted password for admin user
+      - name: JuiceWorks Student
+        gecos: "Normal User"
+        primary_group: "users"
+        groups: []
+        lock_passwd: false
+        passwd: "$6$xpQrsCMb1cLrklkr$Y7ip3tCahviNsdlkQeIq.LWl6HA8XtjSufU1xRz6psA4xe9f3Bn5pRp8FTkMkzyX8sHNiFIluE/e36ihEkNQQ/" # Encrypted password for normal user
+  late-commands:
+    - echo "network: {config: disabled}" > /target/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+    - echo "network:" > /target/etc/netplan/01-netcfg.yaml
+    - echo "  version: 2" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "  wifis:" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "    wlan0:" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "      dhcp4: true" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "      access-points:" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "        \"JuiceWorks WiFi\":" >> /target/etc/netplan/01-netcfg.yaml
+    - echo "          password: \"JWx3DMkr!\"" >> /target/etc/netplan/01-netcfg.yaml
+    - |
+      printf '#!/bin/bash\nhostnamectl set-hostname JWx-Laptop-$(shuf -i 1000-9999 -n 1)\n' > /target/usr/local/bin/set-hostname
+    - |
+      chmod +x /target/usr/local/bin/set-hostname
+    - |
+      chroot /target /usr/local/bin/set-hostname
+  ssh:
+    install-server: false
+    allow-pw: false
+  storage:
+    layout:
+      name: direct
+    config:
+      - id: disk0
+        type: disk
+        match:
+          size: largest
+        ptable: gpt
+        wipe: superblock-recursive
+        preserve: false
+        name: ''
+        grub_device: true
+        on-root-failure: continue
+        device: /dev/sda
+        partitions:
+          - type: efi
+            size: 512M
+            wipe: superblock
+            flag: boot
+            name: EFI System Partition
+          - type: ext4
+            size: 100%
+            flag: ''
+            name: ''
+            wipe: superblock
+  kernel:
+    package: linux-generic
+  packages:
+    - openssh-server
+    - net-tools
