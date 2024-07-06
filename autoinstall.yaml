@@ -3,8 +3,7 @@ autoinstall:
   identity:
     hostname: temporary-hostname
     username: JuiceWorks Admin
-    password: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0
-" # Encrypted password for admin user
+    password: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0" # Encrypted password for admin user
   user-data:
     disable_root: false
     users:
@@ -14,8 +13,7 @@ autoinstall:
         groups: [sudo, adm]
         sudo: ALL=(ALL) NOPASSWD:ALL
         lock_passwd: false
-        passwd: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0
-" # Encrypted password for admin user
+        passwd: "$6$S/GEjsi3WngD1usB$lt0T9Oc0.xu7kF.r9oUHBc45ggdyMTlCLZx773sebI7kjXkW2xJmLmfMz2xB3fOQ1fyA4jYnRS5ghOOjks7Ce0" # Encrypted password for admin user
       - name: JuiceWorks Student
         gecos: "Normal User"
         primary_group: "users"
