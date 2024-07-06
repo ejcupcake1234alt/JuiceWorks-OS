@@ -9,7 +9,7 @@ autoinstall:
     disable_root: false
     users:
       - name: adminuser
-        gecos: "Admin User"
+        gecos: "JuiceWorks Admin"
         primary_group: "adm"
         groups: [sudo, adm]
         sudo: ALL=(ALL) NOPASSWD:ALL
